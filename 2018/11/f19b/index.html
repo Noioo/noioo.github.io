@@ -1,15 +1,472 @@
-<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script><link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css"><title>spring-ioc-summary | Hello World</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="keywords" content="javaspring"><meta name="description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念."><meta name="keywords" content="java,spring"><meta property="og:type" content="article"><meta property="og:title" content="spring-ioc-summary"><meta property="og:url" content="http://yoursite.com/2018/11/f19b/index.html"><meta property="og:site_name" content="Hello World"><meta property="og:description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念."><meta property="og:locale" content="default"><meta property="og:image" content="http://yoursite.com/2018/11/f19b/images/1541656866724.png"><meta property="og:updated_time" content="2018-11-08T08:27:28.663Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="spring-ioc-summary"><meta name="twitter:description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念."><meta name="twitter:image" content="http://yoursite.com/2018/11/f19b/images/1541656866724.png"><link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml"><link rel="icon" href="/css/images/favicon-f9c0d37a992c2d510d1fe627d30b7dc6.ico"><link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"><style type="text/css">@font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal}@font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal}@font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal}@font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic}</style><link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all"><link rel="stylesheet" href="/css/style-cb7cc6b01b75aa016083ac8d08c0add0.css"><script src="https://code.jquery.com/jquery-3.1.1.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"><link rel="stylesheet" href="/css/hiero-76d4f84da036b1c84384df68436a6ce5.css"><link rel="stylesheet" href="/css/glyphs-d64f4aec3c932d8f23e607e6a1020805.css"><link rel="stylesheet" href="/css/my-d41d8cd98f00b204e9800998ecf8427e.css"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-0123456789ABCDEF",enable_page_level_ads:!0})</script></head></html><script>var themeMenus={"/":"Home","/archives":"Archives","/categories":"Categories","/tags":"Tags","/about":"About"}</script><body data-spy="scroll" data-target="#toc" data-offset="50"><header id="allheader" class="site-header" role="banner"><div class="clearfix container"><div class="site-branding"><h1 class="site-title"><a href="/" title="Hello World" rel="home">Hello World</a></h1><nav id="main-navigation" class="main-navigation" role="navigation"><a class="nav-open">Menu</a> <a class="nav-close">Close</a><div class="clearfix sf-menu"><ul id="main-nav" class="nmenu sf-js-enabled"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"><a href="/">Home</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"><a href="/archives">Archives</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"><a href="/categories">Categories</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"><a href="/tags">Tags</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"><a href="/about">About</a></li></ul></div></nav></div></div></header><div id="originBgDiv" style="background:#fff;width:100%"><div style="max-height:600px;overflow:hidden;display:flex;display:-webkit-flex;align-items:center"><img id="originBg" width="100%" alt="" src=""></div></div><script>function setAboutIMG(){var t="css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(","),e=Math.floor(Math.random()*t.length);t[e].startsWith("http")||0<=t[e].indexOf("://")?document.getElementById("originBg").src=t[e]:document.getElementById("originBg").src="/"+t[e]}bgDiv=document.getElementById("originBgDiv"),location.pathname.match("about")?(setAboutIMG(),bgDiv.style.display="block"):bgDiv.style.display="none"</script><div id="container"><div id="wrap"><div id="content" class="outer"><section id="main" style="float:none"><article id="post-spring-ioc-summary" style="width:66%;float:left" class="article article-type-post" itemscope itemprop="blogPost"><div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template"><header class="article-header"><h1 class="thumb" itemprop="name">spring-ioc-summary</h1></header><div class="article-meta">Posted on <a href="/2018/11/f19b/" class="article-date"><time datetime="2018-11-08T08:24:17.000Z" itemprop="datePublished">November 8, 2018</time></a> <span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></div><div class="article-entry" itemprop="articleBody"><p><img src="images/1541656866724.png" alt=""></p><p>对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念.</p><a id="more"></a><h2 id="Spring-Framework-IoC"><a href="#Spring-Framework-IoC" class="headerlink" title="Spring Framework | IoC"></a>Spring Framework | IoC</h2><h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><blockquote><p>spring version: <code>5.1.1.RELEASE</code></p><ul><li>spring-context</li><li>spring-core</li><li>spring-beans</li></ul></blockquote><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><blockquote><p>从一个简单的示例来入手这个框架, 并<u>尽可能多的贯穿整个框架功能体系</u>.</p></blockquote><p><strong>背景</strong>: 让<code>BeanUser</code>, 调用<code>Bean</code>里面的方法. (即<code>BeanUser</code>需要一个<code>Bean</code>实例)</p><h4 id="bean-Bean-java"><a href="#bean-Bean-java" class="headerlink" title="bean - Bean.java"></a>bean - <code>Bean.java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"Hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>一个简单的类, 当然根据实际开发需求, 我们或许需要一个POJO..</p></blockquote><h4 id="bean使用者-BeanUser-java"><a href="#bean使用者-BeanUser-java" class="headerlink" title="bean使用者 - BeanUser.java"></a>bean使用者 - <code>BeanUser.java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Bean bean;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBean</span><span class="params">(Bean bean)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bean = bean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// use bean's method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">useBean</span><span class="params">()</span></span>&#123;</span><br><span class="line">        bean.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>它通过<code>setBean()</code>函数注入Bean对象, 而这个对象将会由Spring来注入.</p></blockquote><h4 id="Spring-配置-spring-beans-xml"><a href="#Spring-配置-spring-beans-xml" class="headerlink" title="Spring 配置 - spring-beans.xml"></a>Spring 配置 - <code>spring-beans.xml</code></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ignore the dtd --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean"</span> <span class="attr">class</span>=<span class="string">"yag.Bean"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bean"</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure><h4 id="执行者-Runner-java"><a href="#执行者-Runner-java" class="headerlink" title="执行者 - Runner.java"></a>执行者 - <code>Runner.java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forXmlConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// load the config</span></span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"spring-beans.xml"</span>);</span><br><span class="line">  <span class="comment">// get bean </span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class);</span><br><span class="line">    beanUser.useBean(); <span class="comment">// use bean</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>罗列部分代码.</p></blockquote><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上面看到, 一共四个代码片段, 可以将框架分为三个功能部分来学习:</p><ul><li>Bean(<code>Bean</code> 和 <code>BeanUser</code>都是Bean)</li><li>Bean的配置</li><li>执行者</li></ul><blockquote><p>要注意的是, 不是说写在XML配置中的就要划分给配置, 有些内容实际上是为其他部分准备的. 这个<strong>划分是按照功能来划分的</strong>.</p></blockquote><hr><h3 id="Bean-部分"><a href="#Bean-部分" class="headerlink" title="Bean 部分"></a>Bean 部分</h3><blockquote><p>了解Bean定义以及一些附加性功能.</p></blockquote><p>要了解Bean, 就需要从依赖入手. 什么是依赖? 简单的说就是<u>需要谁的实例就依赖谁</u>.</p><h4 id="依赖注入-需要一个Bean实例"><a href="#依赖注入-需要一个Bean实例" class="headerlink" title="依赖注入 - 需要一个Bean实例"></a>依赖注入 - 需要一个Bean实例</h4><p>在示例中所使用的方式是Setter函数注入(又称设值注入, 即通过一个函数的参数来注入), 这种方式源于JavaBean. 还有一种注入称为构造注入, 不过由于Spring的框架”主张”, 它被划分到自动装配中去了.</p><p>在<code>BeanUser</code>类中的setter方法一般如下:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Bean bean;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBean</span><span class="params">(Bean bean)</span></span>&#123; <span class="keyword">this</span>.bean = bean; &#125;</span><br></pre></td></tr></table></figure><p>在Spring中的配置有两种: <code>XML</code>和<code>JavaConfig</code></p><ul><li><p><code>XML</code></p><ul><li><p><code>Bean</code>定义: <code>&lt;bean id=&quot;bean&quot; class=&quot;yag.Bean&quot;&gt;&lt;/bean&gt;</code></p></li><li><p><code>BeanUse</code>注入定义:</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bean"</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li></ul></li><li><p><code>JavaConfig</code><a href="使用Java代码+注解的方式来配置Bean.">^JavaConfig</a></p></li></ul><h4 id="自动装配-自动注入Bean实例"><a href="#自动装配-自动注入Bean实例" class="headerlink" title="自动装配 - 自动注入Bean实例"></a>自动装配 - 自动注入Bean实例</h4><p>自动装配指的是自动注入Bean示例. 目的是节约过多的代码量, 有助于Bean的管理. 在Spring中自动装配有三种:</p><ul><li><p><code>byName</code> - 通过注入参数的属性名来匹配<code>Bean id</code></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- byName --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 去掉了property, 新增了属性autowire="byName" --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span> <span class="attr">autowire</span>=<span class="string">"byName"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- BeanUser将用属性名来匹配Bean id --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><code>byType</code> - 通过注入参数的类型来匹配<code>Bean</code> 类型.</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- byType --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span> <span class="attr">autowire</span>=<span class="string">"byType"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 它将会以定义的属性值的类型来匹配这里的Bean名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 因为是根据类型匹配的, 我们甚至连给这个Bean起id都不用 --&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><code>constructor-arg</code> - 构造注入, 指定<code>Bean id</code></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- constructor-arg --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li></ul><h4 id="限定操作-精准匹配到Bean"><a href="#限定操作-精准匹配到Bean" class="headerlink" title="限定操作 - 精准匹配到Bean"></a>限定操作 - 精准匹配到Bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// on construction method:</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BeanUser</span><span class="params">(@Qualifier(value=<span class="string">"the_bean_id"</span>)</span>Bean bean)</span>&#123;<span class="keyword">this</span>.bean=bean;&#125;</span><br><span class="line"><span class="comment">// on setter method: same as construction method</span></span><br></pre></td></tr></table></figure><blockquote><p>这个一般用于配合自动装配使用, 当自动装配匹配不到时, 再用这个注解进一步匹配到具体的Bean id.</p><p>需要在配置文件中启用注解: <code>&lt;context:annotation-config/&gt;</code></p></blockquote><h3 id="Config-部分"><a href="#Config-部分" class="headerlink" title="Config 部分"></a>Config 部分</h3><h4 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"..."</span> <span class="attr">class</span>=<span class="string">"..."</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">scope</span>=<span class="string">"&#123;singleton(default)|prototype|request|session|global-session&#125;"</span>/&gt;</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>作用域</th><th>描述</th></tr></thead><tbody><tr><td><code>singleton</code></td><td>在spring IoC容器仅存在一个Bean实例，Bean以单例方式存在，默认值</td></tr><tr><td><code>prototype</code></td><td>每次从容器中调用Bean时，都返回一个新的实例，即每次调用<code>getBean()</code>时，相当于执行<code>newXxxBean()</code></td></tr><tr><td><code>request</code></td><td>每次HTTP请求都会创建一个新的Bean，该作用域仅适用于<code>WebApplicationContext</code>环境</td></tr><tr><td><code>session</code></td><td>同一个HTTP Session共享一个Bean，不同Session使用不同的Bean，仅适用于<code>WebApplicationContext</code>环境</td></tr><tr><td><code>global-session</code></td><td>一般用于Portlet应用环境，该运用域仅适用于<code>WebApplicationContext</code>环境</td></tr></tbody></table><h4 id="Bean的继承关系"><a href="#Bean的继承关系" class="headerlink" title="Bean的继承关系"></a>Bean的继承关系</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父 bean 自身不能被实例化，因为它是不完整的，而且它也被明确地标记为抽象的。--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanTeamplate"</span> <span class="attr">abstract</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"message1"</span> <span class="attr">value</span>=<span class="string">"Hello World!"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloChina"</span> <span class="attr">class</span>=<span class="string">"com.Hello"</span> <span class="attr">parent</span>=<span class="string">"beanTeamplate"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"message1"</span> <span class="attr">value</span>=<span class="string">"Hello China!"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><h4 id="配置import"><a href="#配置import" class="headerlink" title="配置import"></a>配置import</h4><h4 id="Java-Config"><a href="#Java-Config" class="headerlink" title="Java Config"></a>Java Config</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaConfig</span></span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span> <span class="comment">// or: @Bean(name="beanId")</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Bean <span class="title">bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Bean();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p><code>Bean</code>类, <code>JavaConfig</code>类都需要被注解 <code>@Configuration</code></p></blockquote><p>需要在XML配置文件中启用注解:</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"yag"</span>/&gt;</span></span><br></pre></td></tr></table></figure><h4 id="Import"><a href="#Import" class="headerlink" title="Import"></a>Import</h4><p>Import的作用是整合配置文件, 让Runner<a href="Runner是程序的执行者">^Runner</a>只需要加载一个配置文件即可.</p><h4 id="xml-config"><a href="#xml-config" class="headerlink" title="xml config"></a>xml config</h4><p>You can use the application context constructor to load bean definitions from all these XML fragments.</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span> <span class="comment">&lt;!-- runner just only load this xml file --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"services.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"resources/messageSource.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"/resources/themeSource.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean1"</span> <span class="attr">class</span>=<span class="string">"..."</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean2"</span> <span class="attr">class</span>=<span class="string">"..."</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure><h4 id="java-config"><a href="#java-config" class="headerlink" title="java config"></a>java config</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(ConfigA.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigB</span> </span>&#123; <span class="comment">// runner just only load it</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">b</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="Runner-部分"><a href="#Runner-部分" class="headerlink" title="Runner 部分"></a>Runner 部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forXmlConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"spring-beans.xml"</span>);</span><br><span class="line">  <span class="comment">// get Bean </span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forJavaConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(JavaConfig.class);</span><br><span class="line">  <span class="comment">// get Bean</span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class); <span class="comment">//or getBean("BeanId")</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h3 id="其他内容"><a href="#其他内容" class="headerlink" title="其他内容"></a>其他内容</h3><ul><li>JSR-250</li><li>JSR-330</li><li>关于Bean 容器</li><li>Bean Context Factorys</li></ul></div><footer class="entry-meta entry-footer"><span class="ico-folder"></span> <a class="article-category-link" href="/categories/Develop/">Develop</a>, <a class="article-category-link" href="/categories/Develop/Java/">Java</a>, <a class="article-category-link" href="/categories/Develop/Java/Code/">Code</a> <span class="ico-tags"></span><ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul></footer></div></article><aside id="sidebar"><div id="toc" class="toc-article"><strong class="toc-title">Contents</strong><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Framework-IoC"><span class="nav-number">1.</span> <span class="nav-text">Spring Framework | IoC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#version"><span class="nav-number">1.1.</span> <span class="nav-text">version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bean-Bean-java"><span class="nav-number">1.2.1.</span> <span class="nav-text">bean - Bean.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bean使用者-BeanUser-java"><span class="nav-number">1.2.2.</span> <span class="nav-text">bean使用者 - BeanUser.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-配置-spring-beans-xml"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spring 配置 - spring-beans.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行者-Runner-java"><span class="nav-number">1.2.4.</span> <span class="nav-text">执行者 - Runner.java</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean-部分"><span class="nav-number">1.4.</span> <span class="nav-text">Bean 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖注入-需要一个Bean实例"><span class="nav-number">1.4.1.</span> <span class="nav-text">依赖注入 - 需要一个Bean实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装配-自动注入Bean实例"><span class="nav-number">1.4.2.</span> <span class="nav-text">自动装配 - 自动注入Bean实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限定操作-精准匹配到Bean"><span class="nav-number">1.4.3.</span> <span class="nav-text">限定操作 - 精准匹配到Bean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-部分"><span class="nav-number">1.5.</span> <span class="nav-text">Config 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的作用域"><span class="nav-number">1.5.1.</span> <span class="nav-text">Bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的继承关系"><span class="nav-number">1.5.2.</span> <span class="nav-text">Bean的继承关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置import"><span class="nav-number">1.5.3.</span> <span class="nav-text">配置import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-Config"><span class="nav-number">1.5.4.</span> <span class="nav-text">Java Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Import"><span class="nav-number">1.5.5.</span> <span class="nav-text">Import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml-config"><span class="nav-number">1.5.6.</span> <span class="nav-text">xml config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-config"><span class="nav-number">1.5.7.</span> <span class="nav-text">java config</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runner-部分"><span class="nav-number">1.6.</span> <span class="nav-text">Runner 部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他内容"><span class="nav-number">1.7.</span> <span class="nav-text">其他内容</span></a></li></ol></li></ol></div></aside></section></div><footer id="footer" class="site-footer"><div class="clearfix container"><div class="site-info">&copy; 2018 Hello World All Rights Reserved. <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次 本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></div><div class="site-credit">Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a></div></div></footer><script>var contentdiv=document.getElementById("content");contentdiv.style.minHeight=document.body.offsetHeight-document.getElementById("allheader").offsetHeight-document.getElementById("footer").offsetHeight+"px"</script><script src="/js/my-d41d8cd98f00b204e9800998ecf8427e.js"></script></div><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>spring-ioc-summary | Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="javaspring">
+  
+  
+  
+  
+  <meta name="description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念.">
+<meta name="keywords" content="java,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-ioc-summary">
+<meta property="og:url" content="http://yoursite.com/2018/11/f19b/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念.">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/1541656866724.png">
+<meta property="og:updated_time" content="2018-11-08T08:40:15.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring-ioc-summary">
+<meta name="twitter:description" content="对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念.">
+<meta name="twitter:image" content="http://yoursite.com/images/1541656866724.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello World" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "Home"; 
+
+  themeMenus["/archives"] = "Archives"; 
+
+  themeMenus["/categories"] = "Categories"; 
+
+  themeMenus["/tags"] = "Tags"; 
+
+  themeMenus["/about"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Hello World" rel="home"> Hello World </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-spring-ioc-summary" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      spring-ioc-summary
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2018/11/f19b/" class="article-date">
+	  <time datetime="2018-11-08T08:24:17.000Z" itemprop="datePublished">November 8, 2018</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/1541656866724.png" alt=""></p>
+<p>对Spring IoC部分的功能做一个大致的概述, 😋不过不会那么细致, 只涉及常用的功能. 也不过多介绍Spring中的一些概念. </p>
+<a id="more"></a>
+<h2 id="Spring-Framework-IoC"><a href="#Spring-Framework-IoC" class="headerlink" title="Spring Framework | IoC"></a>Spring Framework | IoC</h2><h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><blockquote>
+<p>spring version: <code>5.1.1.RELEASE</code></p>
+<ul>
+<li>spring-context</li>
+<li>spring-core</li>
+<li>spring-beans</li>
+</ul>
+</blockquote>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><blockquote>
+<p>从一个简单的示例来入手这个框架, 并<u>尽可能多的贯穿整个框架功能体系</u>. </p>
+</blockquote>
+<p><strong>背景</strong>: 让<code>BeanUser</code>, 调用<code>Bean</code>里面的方法. (即<code>BeanUser</code>需要一个<code>Bean</code>实例)</p>
+<h4 id="bean-Bean-java"><a href="#bean-Bean-java" class="headerlink" title="bean - Bean.java"></a>bean - <code>Bean.java</code></h4> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"Hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一个简单的类, 当然根据实际开发需求, 我们或许需要一个POJO.. </p>
+</blockquote>
+<h4 id="bean使用者-BeanUser-java"><a href="#bean使用者-BeanUser-java" class="headerlink" title="bean使用者 - BeanUser.java"></a>bean使用者 - <code>BeanUser.java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Bean bean;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBean</span><span class="params">(Bean bean)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bean = bean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// use bean's method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">useBean</span><span class="params">()</span></span>&#123;</span><br><span class="line">        bean.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>它通过<code>setBean()</code>函数注入Bean对象, 而这个对象将会由Spring来注入. </p>
+</blockquote>
+<h4 id="Spring-配置-spring-beans-xml"><a href="#Spring-配置-spring-beans-xml" class="headerlink" title="Spring 配置 - spring-beans.xml"></a>Spring 配置 - <code>spring-beans.xml</code></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ignore the dtd --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean"</span> <span class="attr">class</span>=<span class="string">"yag.Bean"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bean"</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="执行者-Runner-java"><a href="#执行者-Runner-java" class="headerlink" title="执行者 - Runner.java"></a>执行者 - <code>Runner.java</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forXmlConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// load the config</span></span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"spring-beans.xml"</span>);</span><br><span class="line">  <span class="comment">// get bean </span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class);</span><br><span class="line">    beanUser.useBean(); <span class="comment">// use bean</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>罗列部分代码. </p>
+</blockquote>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>从上面看到, 一共四个代码片段, 可以将框架分为三个功能部分来学习: </p>
+<ul>
+<li>Bean(<code>Bean</code> 和 <code>BeanUser</code>都是Bean)</li>
+<li>Bean的配置</li>
+<li>执行者</li>
+</ul>
+<blockquote>
+<p>要注意的是, 不是说写在XML配置中的就要划分给配置, 有些内容实际上是为其他部分准备的. 这个<strong>划分是按照功能来划分的</strong>. </p>
+</blockquote>
+<hr>
+<h3 id="Bean-部分"><a href="#Bean-部分" class="headerlink" title="Bean 部分"></a>Bean 部分</h3><blockquote>
+<p>了解Bean定义以及一些附加性功能. </p>
+</blockquote>
+<p>要了解Bean, 就需要从依赖入手. 什么是依赖? 简单的说就是<u>需要谁的实例就依赖谁</u>. </p>
+<h4 id="依赖注入-需要一个Bean实例"><a href="#依赖注入-需要一个Bean实例" class="headerlink" title="依赖注入 - 需要一个Bean实例"></a>依赖注入 - 需要一个Bean实例</h4><p>在示例中所使用的方式是Setter函数注入(又称设值注入, 即通过一个函数的参数来注入), 这种方式源于JavaBean. 还有一种注入称为构造注入, 不过由于Spring的框架”主张”, 它被划分到自动装配中去了. </p>
+<p>在<code>BeanUser</code>类中的setter方法一般如下:  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Bean bean;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBean</span><span class="params">(Bean bean)</span></span>&#123; <span class="keyword">this</span>.bean = bean; &#125;</span><br></pre></td></tr></table></figure>
+<p>在Spring中的配置有两种: <code>XML</code>和<code>JavaConfig</code></p>
+<ul>
+<li><p><code>XML</code></p>
+<ul>
+<li><p><code>Bean</code>定义: <code>&lt;bean id=&quot;bean&quot; class=&quot;yag.Bean&quot;&gt;&lt;/bean&gt;</code></p>
+</li>
+<li><p><code>BeanUse</code>注入定义: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"bean"</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>JavaConfig</code><a href="使用Java代码+注解的方式来配置Bean.">^JavaConfig</a></p>
+</li>
+</ul>
+<h4 id="自动装配-自动注入Bean实例"><a href="#自动装配-自动注入Bean实例" class="headerlink" title="自动装配 - 自动注入Bean实例"></a>自动装配 - 自动注入Bean实例</h4><p> 自动装配指的是自动注入Bean示例. 目的是节约过多的代码量, 有助于Bean的管理. 在Spring中自动装配有三种: </p>
+<ul>
+<li><p><code>byName</code> - 通过注入参数的属性名来匹配<code>Bean id</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- byName --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 去掉了property, 新增了属性autowire="byName" --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span> <span class="attr">autowire</span>=<span class="string">"byName"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- BeanUser将用属性名来匹配Bean id --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>byType</code> - 通过注入参数的类型来匹配<code>Bean</code> 类型.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- byType --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanUser"</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span> <span class="attr">autowire</span>=<span class="string">"byType"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 它将会以定义的属性值的类型来匹配这里的Bean名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 因为是根据类型匹配的, 我们甚至连给这个Bean起id都不用 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>constructor-arg</code> - 构造注入, 指定<code>Bean id</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- constructor-arg --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"yag.BeanUser"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"bean"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="限定操作-精准匹配到Bean"><a href="#限定操作-精准匹配到Bean" class="headerlink" title="限定操作 - 精准匹配到Bean"></a>限定操作 - 精准匹配到Bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// on construction method:</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BeanUser</span><span class="params">(@Qualifier(value=<span class="string">"the_bean_id"</span>)</span>Bean bean)</span>&#123;<span class="keyword">this</span>.bean=bean;&#125;</span><br><span class="line"><span class="comment">// on setter method: same as construction method</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这个一般用于配合自动装配使用, 当自动装配匹配不到时, 再用这个注解进一步匹配到具体的Bean id.  </p>
+<p>需要在配置文件中启用注解: <code>&lt;context:annotation-config/&gt;</code></p>
+</blockquote>
+<h3 id="Config-部分"><a href="#Config-部分" class="headerlink" title="Config 部分"></a>Config 部分</h3><h4 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"..."</span> <span class="attr">class</span>=<span class="string">"..."</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">scope</span>=<span class="string">"&#123;singleton(default)|prototype|request|session|global-session&#125;"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>singleton</code></td>
+<td>在spring IoC容器仅存在一个Bean实例，Bean以单例方式存在，默认值</td>
+</tr>
+<tr>
+<td><code>prototype</code></td>
+<td>每次从容器中调用Bean时，都返回一个新的实例，即每次调用<code>getBean()</code>时，相当于执行<code>newXxxBean()</code></td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>每次HTTP请求都会创建一个新的Bean，该作用域仅适用于<code>WebApplicationContext</code>环境</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>同一个HTTP Session共享一个Bean，不同Session使用不同的Bean，仅适用于<code>WebApplicationContext</code>环境</td>
+</tr>
+<tr>
+<td><code>global-session</code></td>
+<td>一般用于Portlet应用环境，该运用域仅适用于<code>WebApplicationContext</code>环境</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Bean的继承关系"><a href="#Bean的继承关系" class="headerlink" title="Bean的继承关系"></a>Bean的继承关系</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父 bean 自身不能被实例化，因为它是不完整的，而且它也被明确地标记为抽象的。--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanTeamplate"</span> <span class="attr">abstract</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"message1"</span> <span class="attr">value</span>=<span class="string">"Hello World!"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloChina"</span> <span class="attr">class</span>=<span class="string">"com.Hello"</span> <span class="attr">parent</span>=<span class="string">"beanTeamplate"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"message1"</span> <span class="attr">value</span>=<span class="string">"Hello China!"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置import"><a href="#配置import" class="headerlink" title="配置import"></a>配置import</h4><h4 id="Java-Config"><a href="#Java-Config" class="headerlink" title="Java Config"></a>Java Config</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaConfig</span></span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span> <span class="comment">// or: @Bean(name="beanId")</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Bean <span class="title">bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Bean();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>Bean</code>类, <code>JavaConfig</code>类都需要被注解 <code>@Configuration</code></p>
+</blockquote>
+<p>需要在XML配置文件中启用注解: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"yag"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Import"><a href="#Import" class="headerlink" title="Import"></a>Import</h4><p>Import的作用是整合配置文件, 让Runner<a href="Runner是程序的执行者">^Runner</a>只需要加载一个配置文件即可. </p>
+<h4 id="xml-config"><a href="#xml-config" class="headerlink" title="xml config"></a>xml config</h4><p>You can use the application context constructor to load bean definitions from all these XML fragments. </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span> <span class="comment">&lt;!-- runner just only load this xml file --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"services.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"resources/messageSource.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"/resources/themeSource.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean1"</span> <span class="attr">class</span>=<span class="string">"..."</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean2"</span> <span class="attr">class</span>=<span class="string">"..."</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="java-config"><a href="#java-config" class="headerlink" title="java config"></a>java config</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(ConfigA.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigB</span> </span>&#123; <span class="comment">// runner just only load it</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">b</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Runner-部分"><a href="#Runner-部分" class="headerlink" title="Runner 部分"></a>Runner 部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forXmlConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"spring-beans.xml"</span>);</span><br><span class="line">  <span class="comment">// get Bean </span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forJavaConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(JavaConfig.class);</span><br><span class="line">  <span class="comment">// get Bean</span></span><br><span class="line">  BeanUser beanUser = (BeanUser)context.getBean(BeanUser.class); <span class="comment">//or getBean("BeanId")</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="其他内容"><a href="#其他内容" class="headerlink" title="其他内容"></a>其他内容</h3><ul>
+<li>JSR-250</li>
+<li>JSR-330</li>
+<li>关于Bean 容器</li>
+<li>Bean Context Factorys</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>, <a class="article-category-link" href="/categories/Develop/Java/">Java</a>, <a class="article-category-link" href="/categories/Develop/Java/Code/">Code</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Framework-IoC"><span class="nav-number">1.</span> <span class="nav-text">Spring Framework | IoC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#version"><span class="nav-number">1.1.</span> <span class="nav-text">version</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.2.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bean-Bean-java"><span class="nav-number">1.2.1.</span> <span class="nav-text">bean - Bean.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bean使用者-BeanUser-java"><span class="nav-number">1.2.2.</span> <span class="nav-text">bean使用者 - BeanUser.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-配置-spring-beans-xml"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spring 配置 - spring-beans.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行者-Runner-java"><span class="nav-number">1.2.4.</span> <span class="nav-text">执行者 - Runner.java</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean-部分"><span class="nav-number">1.4.</span> <span class="nav-text">Bean 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖注入-需要一个Bean实例"><span class="nav-number">1.4.1.</span> <span class="nav-text">依赖注入 - 需要一个Bean实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装配-自动注入Bean实例"><span class="nav-number">1.4.2.</span> <span class="nav-text">自动装配 - 自动注入Bean实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限定操作-精准匹配到Bean"><span class="nav-number">1.4.3.</span> <span class="nav-text">限定操作 - 精准匹配到Bean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-部分"><span class="nav-number">1.5.</span> <span class="nav-text">Config 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的作用域"><span class="nav-number">1.5.1.</span> <span class="nav-text">Bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的继承关系"><span class="nav-number">1.5.2.</span> <span class="nav-text">Bean的继承关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置import"><span class="nav-number">1.5.3.</span> <span class="nav-text">配置import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-Config"><span class="nav-number">1.5.4.</span> <span class="nav-text">Java Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Import"><span class="nav-number">1.5.5.</span> <span class="nav-text">Import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml-config"><span class="nav-number">1.5.6.</span> <span class="nav-text">xml config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-config"><span class="nav-number">1.5.7.</span> <span class="nav-text">java config</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runner-部分"><span class="nav-number">1.6.</span> <span class="nav-text">Runner 部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他内容"><span class="nav-number">1.7.</span> <span class="nav-text">其他内容</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 Hello World All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
       processEscapes: true
     }
-  });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
-    });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for(i=0; i < all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
-    });</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script><script src="/js/scripts-f287924b3f7e299b3fc89b778b50c52c.js"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="/js/main-d84a03b377ab984c4df7109480c88c17.js"></script><div style="display:none"><script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script></div><script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js"></script></div><a id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop-e63c18edf37270f628059f78598b2e03.js" async></script></body>
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
